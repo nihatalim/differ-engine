@@ -1,9 +1,8 @@
 # differ-engine
 
 
-
-POST /differ/execute
 ```
+POST /differ/execute
 {
     "operationId": "d6a7b123-4567-89ab-cdef-0123456789ab",
     "templates": {
