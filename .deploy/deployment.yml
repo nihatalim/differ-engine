@@ -21,7 +21,7 @@ spec:
         - name: differ-engine
           env:
             - name: PORT
-              value: 9090
+              value: "9090"
           resources:
             requests:
               memory: "100Mi"
