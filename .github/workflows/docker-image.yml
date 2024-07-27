@@ -15,10 +15,10 @@ jobs:
     - name: Extract short commit SHA
       run: echo "SHORT_SHA=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag harbor.nihatalim.com.tr/differ/differ-engine:${{ SHORT_SHA }}
+      run: docker build . --file Dockerfile --tag harbor.nihatalim.com.tr/differ/differ-engine:${{ env.SHORT_SHA }}
       
     - name: Log in to private Docker registry
       run: echo "${{ secrets.PRIVATE_REGISTRY_PASSWORD }}" | docker login harbor.nihatalim.com.tr/differ -u "${{ secrets.PRIVATE_REGISTRY_USERNAME }}" --password-stdin
 
     - name: Push Docker image
-      run: docker push harbor.nihatalim.com.tr/differ/differ-engine:${{ SHORT_SHA }}
+      run: docker push harbor.nihatalim.com.tr/differ/differ-engine:${{ env.SHORT_SHA }}
