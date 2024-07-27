@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: differ-engine-service
+  namespace: differ
+spec:
+  selector:
+    app: differ-engine
+  ports:
+    - name: http
+      port: 9090
+      targetPort: http

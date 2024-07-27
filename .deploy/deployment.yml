@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: differ-engine
+  namespace: differ
+  labels:
+    app: differ-engine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: differ-engine
+  template:
+    metadata:
+      labels:
+        app: differ-engine
+    spec:
+      imagePullSecrets:
+        - name: git-secret
+      containers:
+        - name: differ-engine
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "100m"
+            limits:
+              memory: "521Mi"
+              cpu: "500m"
+          image: harbor.nihatalim.com.tr/differ/differ-engine:1ccdee1
+          ports:
+            - name: http
+              containerPort: 9090
