@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag harbor.nihatalim.com.tr/differ/differ-engine:${{ steps.vars.outputs.short_sha }}
+      
+    - name: Log in to private Docker registry
+      run: echo "${{ secrets.PRIVATE_REGISTRY_PASSWORD }}" | docker login harbor.nihatalim.com.tr/differ -u "${{ secrets.PRIVATE_REGISTRY_USERNAME }}" --password-stdin
+
+    - name: Push Docker image
+      run: docker push harbor.nihatalim.com.tr/differ/differ-engine:${{ steps.vars.outputs.short_sha }}
