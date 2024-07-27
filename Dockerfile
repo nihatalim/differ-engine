@@ -1,4 +1,4 @@
-FROM registry.trendyol.com/platform/base/image/node:16.17.1
+FROM node:20
 
 COPY package*.json ./
 COPY . .
