@@ -26,7 +26,7 @@ spec:
             limits:
               memory: "521Mi"
               cpu: "500m"
-          image: harbor.nihatalim.com.tr/differ/differ-engine:1ccdee1
+          image: harbor.nihatalim.com.tr/differ/differ-engine:27380b
           ports:
             - name: http
               containerPort: 9090
