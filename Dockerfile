@@ -1,4 +1,4 @@
-FROM node:20
+FROM FROM node:20-alpine
 
 COPY package*.json ./
 COPY . .
