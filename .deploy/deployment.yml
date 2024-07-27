@@ -16,7 +16,7 @@ spec:
         app: differ-engine
     spec:
       imagePullSecrets:
-        - name: git-secret
+        - name: differ-secret
       containers:
         - name: differ-engine
           resources:
