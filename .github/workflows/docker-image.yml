@@ -27,6 +27,8 @@ jobs:
       needs: build
   
       steps:
+      - name: Extract short commit SHA
+        run: echo "SHORT_SHA=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
       - name: Checkout target repo
         uses: actions/checkout@v4
         with:
