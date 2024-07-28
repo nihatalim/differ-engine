@@ -47,6 +47,6 @@ jobs:
           git add .
           git commit -m "Update image version to harbor.nihatalim.com.tr/differ/differ-engine:${{ env.SHORT_SHA }}"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.KUSTOMIZE_REPOSITORY_TOKEN }}
-          SHORT_SHA: ${{ needs.build.outputs.short_sha }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.KUSTOMIZE_REPOSITORY_TOKEN }}
+        SHORT_SHA: ${{ needs.build.outputs.short_sha }}
