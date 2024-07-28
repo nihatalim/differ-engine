@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      short_sha: ${{ steps.check-prs.outputs.SHORT_SHA }}
+      short_sha: ${{ steps.build.outputs.SHORT_SHA }}
     steps:
     - uses: actions/checkout@v4
     - name: Extract short commit SHA
@@ -49,4 +49,4 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.KUSTOMIZE_REPOSITORY_TOKEN }}
-          SHORT_SHA: ${{ needs.check-pr.outputs.short_sha }}
+          SHORT_SHA: ${{ needs.build.outputs.short_sha }}
