@@ -17,15 +17,15 @@ app.post('/differ/execute', async (req, res) => {
 
     fetchParallelWithRetry(req.body).then(({ leftResponse, rightResponse }) => {
         hasDiff = hasDifference(leftResponse, rightResponse)
+
+        res.send({
+            hasDiff: hasDiff
+        })
     })
     .catch(error => {
         console.error('Error:', error);
         res.sendStatus(500);
     });
-
-    res.send({
-        hasDiff: hasDiff
-    })
 })
 
 
