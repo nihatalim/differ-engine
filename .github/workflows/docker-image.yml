@@ -31,8 +31,6 @@ jobs:
       needs: build
   
       steps:
-      - name: Extract short commit SHA
-        run: echo "SHORT_SHA=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
       - name: Checkout target repo
         uses: actions/checkout@v4
         with:
@@ -47,7 +45,7 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
-          git commit -m "Update image version to ${{ github.sha }}"
+          git commit -m "Update image version to harbor.nihatalim.com.tr/differ/differ-engine:${{ env.SHORT_SHA }}"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.KUSTOMIZE_REPOSITORY_TOKEN }}
