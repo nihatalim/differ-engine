@@ -9,11 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    outputs:
+      short_sha: ${{ steps.check-prs.outputs.SHORT_SHA }}
     steps:
     - uses: actions/checkout@v4
     - name: Extract short commit SHA
-      run: echo "SHORT_SHA=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
+      run: |
+        echo "SHORT_SHA=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
+        echo "SHORT_SHA=$(git rev-parse --short=6 HEAD)" >> $GITHUB_OUTPUT
+      
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag harbor.nihatalim.com.tr/differ/differ-engine:${{ env.SHORT_SHA }}
       
@@ -47,3 +51,4 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.KUSTOMIZE_REPOSITORY_TOKEN }}
+          SHORT_SHA: ${{ needs.check-pr.outputs.short_sha }}
